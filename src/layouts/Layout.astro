@@ -1,4 +1,10 @@
 ---
+import { ViewTransitions } from "astro:transitions";
+import CatIcon from "../components/icons/CatIcon.astro";
+import CatLoader from "../components/loaders/CatLoader.astro";
+import Pepinos from "../components/effects/Pepinos.astro";
+import Game from "../components/embeds/game.astro";
+
 interface Props {
 	title: string;
 }
@@ -10,14 +16,42 @@ const { title } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content="Porfolio web by Doger" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<ViewTransitions />
 	</head>
-	<body>
-		<slot />
+	<body class="min-h-dvh grid-rows-[auto_1fr_auto]">
+		<CatLoader />
+		<Pepinos />
+		<!-- Add hidden in production -->
+		<header
+			class="static flex justify-center h-20 bg-black/70 backdrop-blur-md z-20 border-b border-b-1 border-neutral-600"
+			id="navigation"
+		>
+			<div class="flex flex-auto justify-start ml-9 items-center gap-4">
+				<div id="logo-conteiner">
+					<CatIcon />
+				</div>
+				<h1 class="text-white text-3xl font-extralight">Dot Dager</h1>
+			</div>
+			<ul
+				class="flex flex-1 flex-grow gap-8 text-white items-center justify-end mr-9"
+			>
+				<li class="hover:font-semibold transition-all ease-in-out delay-75"><a href="#about">About me</a></li>
+				<li class="hover:font-semibold transition-all ease-in-out delay-75"><a href="#contact">Contact</a></li>
+			</ul>
+		</header>
+		<!-- Add hidden in production -->
+		<main class="hidden grid-rows-3" id="content">
+			<Game />
+			<slot />
+		</main>
+		<footer class="flex justify-center items-center h-20 bg-black/70 backdrop-blur-md z-20 border-t border-t-1 border-neutral-600" id="content">
+			<p class="text-white" >Landing page created by Yasson</p>
+		</footer>
 	</body>
 </html>
 <style is:global>
@@ -34,17 +68,72 @@ const { title } = Astro.props;
 	}
 	html {
 		font-family: system-ui, sans-serif;
-		background: #13151a;
+		background: #111111;
 	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
+	.title-animate {
+		animation: text-display 1.5s both;
+	}
+	@keyframes text-display {
+		0% {
+			opacity: 0;
+			translate: -2rem 0px 0px;
+		}
+		50% {
+			opacity: 0.5;
+		}
+		100% {
+			opacity: 1;
+			translate: 0px 0px 0px;
+		}
+	}
+
+	.logo-animate {
+		animation: logo-display 1s both;
+	}
+	@keyframes logo-display {
+		0% {
+			opacity: 0;
+			translate: 2rem 0px 0px;
+		}
+		50% {
+			opacity: 0.5;
+		}
+		100% {
+			opacity: 1;
+			translate: 0px 0px 0px;
+		}
+
 	}
 </style>
+<script>
+	let navigation = document.getElementById("navigation");
+	let loader = document.getElementById("loader-cat");
+	let textLoader = document.getElementById("text-loader");
+	let logoLoader = document.getElementById("catIcon-loader");
+	let content = document.getElementById("content")
+	// Header
+	let logo = document.getElementById("logo-conteiner")
+	let title = document.getElementById("title-conteiner")
+
+	document.addEventListener("astro:after-swap", () => {
+		loader!.style.display = "block";
+	});
+	document.addEventListener(
+		"astro:page-load",
+		() => {
+			setTimeout(() => {
+				textLoader?.classList.add("text-animate");
+				logoLoader?.classList.add("logo-animate");
+			}, 400);
+			setTimeout(() => {
+				navigation?.classList.remove("hidden")
+				loader!.style.display = "none";
+				content?.classList.remove("hidden")
+				content?.classList.add("grid")
+				logo?.classList.add("logo-animate")
+				title?.classList.add("title-animate")
+			}, 500);
+		},
+		{ once: true },
+	);
+</script>

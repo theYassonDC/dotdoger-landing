@@ -1,0 +1,137 @@
+<section
+  class="flex flex-col justify-center items-center mt-5 row-span-2 gap-4"
+>
+  <h1 class="text-white text-3xl font-semibold text-center p-4" id="about">About me</h1>
+  <div
+    class="flex text-white gap-2 bg-black/70 rounded-lg border border-1 border-neutral-600 w-1/2"
+    id="about"
+  >
+    <img
+      src="assets/dager-poser.png"
+      alt="uy no un poser"
+      class="rounded-l-lg size-60"
+    />
+    <p class="text-left md:p-2">
+      I am passionate about programming and a devoted lover of cucumbers, I
+      absolutely love them. I am a content creator with the goal of educating
+      and entertaining tech enthusiasts with my philosophy of programming and
+      life.
+    </p>
+  </div>
+  <div
+    class="flex text-white gap-2 bg-black/70 rounded-lg border border-1 border-neutral-600 w-1/2"
+    id="about"
+  >
+    <img
+      src="assets/catdager.jpg"
+      alt="cat jeje"
+      class="rounded-l-lg size-60"
+    />
+    <p class="text-left md:p-2">
+      I have extensive experience in <span class="text-purple-600">C#</span> and <span class="text-yellow-600">Java</span> for applications or software
+      with high scalability, as well as with <span class="text-yellow-500 font-semibold cursor-pointer" id="javascript-txt">javaScript</span> for web development and
+      many more.
+    </p>
+  </div>
+  <p class="text-white text-3xl font-semibold text-center p-4">
+    Watch one of my videos
+  </p>
+  <div
+    class="flex flex-wrap items-center justify-center gap-3 w-1/2 m-5"
+    id="videos"
+  >
+    <iframe
+      width="460"
+      height="215"
+      src="https://www.youtube.com/embed/fUeIDRcI0ZM?si=AziYLUjCTGdLHJKk"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen></iframe>
+    <iframe
+      width="460"
+      height="215"
+      src="https://www.youtube.com/embed/FlO796ke0AI?si=w7BLNcPu6oPsvRKj"
+      title="YouTube video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen></iframe>
+    <iframe
+      width="460"
+      height="215"
+      src="https://www.youtube.com/embed/c2EJRboAYL4?si=IpXJ-9qV3ZcM1i0v"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen></iframe>
+  </div>
+</section>
+<style>
+  .animate_cards {
+    animation: revealing_info_cards 1s both;
+  }
+  @keyframes revealing_info_cards {
+    0% {
+      opacity: 0;
+      translate: 0px 50px 0px;
+    }
+    100% {
+      opacity: 1;
+      translate: 0px 0px 0px;
+    }
+  }
+
+  .about-card {
+    animation: info_cards 1s both;
+  }
+  @keyframes info_cards {
+    0% {
+      opacity: 0;
+      translate: 0px 50px 0px;
+    }
+    100% {
+      opacity: 1;
+      translate: 0px 0px 0px;
+    }
+  }
+</style>
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    // Recorrer las entradas recibidas
+    entries.forEach((entry) => {
+      // Está visible en el viewport
+      if (entry.intersectionRatio > 0) {
+        // entry.target es el elemento que se está observando
+        // Agregar la clase para animar
+        entry.target.classList.add("animate_cards");
+        // Dejar de observar
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+  // Observar elemento a animar
+  const element = document.getElementById("videos");
+  observer.observe(element as HTMLElement);
+  const observer2 = new IntersectionObserver((entries) => {
+    // Recorrer las entradas recibidas
+    entries.forEach((entry) => {
+      // Está visible en el viewport
+      if (entry.intersectionRatio > 0) {
+        // entry.target es el elemento que se está observando
+        // Agregar la clase para animar
+        entry.target.classList.add("about-card");
+        // Dejar de observar
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+  const elemen2 = document.getElementById("about");
+  observer2.observe(elemen2 as HTMLElement);
+  let active = document.getElementById("javascript-txt")
+  let dialog = document.querySelector("dialog")
+  active?.addEventListener("click", () => {
+    dialog!.showModal();
+  })
+</script>

@@ -1,0 +1,113 @@
+---
+import GithubIcon from "../../components/icons/GithubIcon.astro";
+import LinkedinIcon from "../../components/icons/LinkedinIcon.astro";
+import YoutubeIcon from "../../components/icons/YoutubeIcon.astro";
+---
+
+<section class="flex flex-wrap gap-4 justify-center items-center mt-2">
+  <div class="flex gap-2">
+    <img
+      src="assets/dager-cara.png"
+      alt="aa"
+      class="rounded-full size-60 anim-avatar"
+    />
+    <div class="flex flex-col gap-3 text-white">
+      <h1
+        class="[text-shadow:_0_2px_4px_rgb(255_255_255_/_0.3)] text-slate-100 text-xl md:text-3xl font-bold"
+      >
+        Mariano Luis Villa
+      </h1>
+      <p>
+        Developer full stack <span
+          class="text-green-500 hover:font-semibold cursor-pointer"
+          id="pepino">pickle loving</span
+        > and philosophical
+      </p>
+      <ul class="flex gap-2">
+        <a href="https://github.com/MarianoVilla" target="_blank" class="letter"
+          ><GithubIcon /></a
+        >
+        <a href="https://www.youtube.com/@DotDager" target="_blank" class="letter"
+          ><YoutubeIcon /></a
+        >
+        <a
+          href="https://www.linkedin.com/in/mariano-luis-villa/?locale=en_US" class="letter"
+          target="_blank"><LinkedinIcon /></a
+        >
+      </ul>
+    </div>
+  </div>
+  <div class="hidden conteiner-view" id="pepino-conteiner">
+    <img
+      src="assets/pepino.png"
+      alt="Pepino todo pendejo feliz"
+      class="pepino-animated"
+    />
+  </div>
+</section>
+<script>
+  let pepino = document.getElementById("pepino");
+  let pepino_conteiner = document.getElementById("pepino-conteiner");
+  pepino?.addEventListener("click", () => {
+    pepino_conteiner?.classList.remove("hidden");
+  });
+</script>
+<style>
+  .pepino-animated {
+    animation: image-anim-conteiner 3s 2s infinite both;
+  }
+  @keyframes image-anim-conteiner {
+    0% {
+      translate: 0px 0px 0px;
+    }
+    50% {
+      translate: 0px 25px 0px;
+    }
+    100% {
+      translate: 0px 0px 0px;
+    }
+  }
+  .conteiner-view {
+    animation: image-anim-view 1s both;
+  }
+  @keyframes image-anim-view {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .anim-avatar {
+    animation: anim-image-rounded 2s both;
+  }
+  @keyframes anim-image-rounded {
+    0% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  .letter {
+    opacity: 0;
+    animation: appear 2.5s both;
+  }
+
+  .letter:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .letter:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .letter:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes appear {
+    to {
+      opacity: 1;
+    }
+  }
+
+</style>

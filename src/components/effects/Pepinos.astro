@@ -1,0 +1,141 @@
+<div id="conteiner-pepinos" class="hidden relative">
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos"
+    style="left: 10rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos2"
+    style="left: 15rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos3"
+    style="left: 20rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos"
+    style="left: 25rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos2"
+    style="left: 30rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos3"
+    style="left: 35rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos"
+    style="left: 40rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos2"
+    style="left: 45rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos3"
+    style="left: 50rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos"
+    style="left: 55rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos2"
+    style="left: 60rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos3"
+    style="left: 65rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos"
+    style="left: 70rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos2"
+    style="left: 75rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos3"
+    style="left: 80rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos"
+    style="left: 85rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos2"
+    style="left: 90rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos3"
+    style="left: 95rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos"
+    style="left: 100rem;"
+  />
+  <img
+    src="assets/pepinillo-left.png"
+    class="absolute size-10 top-20 animated-pepinos2"
+    style="left: 105rem;"
+  />
+</div>
+<script>
+  let pepino = document.getElementById("pepino");
+  let pepinos = document.getElementById("conteiner-pepinos");
+  pepino?.addEventListener("click", () => {
+    pepinos?.classList.remove("hidden");
+    setTimeout(() => document.body.removeChild(pepinos!), 2000);
+  });
+
+</script>
+<style>
+  .animated-pepinos {
+    position: absolute;
+    animation: pepins 2s both;
+  }
+
+  .animated-pepinos2 {
+    position: absolute;
+    animation: pepins 1s both;
+  }
+
+  .animated-pepinos3 {
+    position: absolute;
+    animation: pepins 0.5s both;
+  }
+  @keyframes pepins {
+    0% {
+      translate: 0px 0px 0px;
+      transform: rotate(0deg);
+    }
+    50% {
+      opacity: 0.2;
+    }
+    100% {
+      translate: 0px 30rem 0px;
+      opacity: 0;
+      transform: rotate(360deg);
+    }
+  }
+</style>
