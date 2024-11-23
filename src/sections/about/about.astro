@@ -1,10 +1,12 @@
 <section
-  class="flex flex-col justify-center items-center mt-5 row-span-2 gap-4"
+  class="flex flex-col justify-center items-center mt-5 row-span-2 gap-10"
 >
-  <h1 class="text-white text-3xl font-semibold text-center p-4" id="about">About me</h1>
+  <h1 class="text-white text-3xl font-semibold text-center p-4" id="about">
+    About me
+  </h1>
   <div
     class="flex text-white gap-2 bg-black/70 rounded-lg border border-1 border-neutral-600 w-1/2"
-    id="about"
+    id="card-about"
   >
     <img
       src="assets/dager-poser.png"
@@ -20,18 +22,24 @@
   </div>
   <div
     class="flex text-white gap-2 bg-black/70 rounded-lg border border-1 border-neutral-600 w-1/2"
-    id="about"
+    id="card-skills"
   >
     <img
       src="assets/catdager.jpg"
       alt="cat jeje"
       class="rounded-l-lg size-60"
     />
-    <p class="text-left md:p-2">
-      I have extensive experience in <span class="text-purple-600">C#</span> and <span class="text-yellow-600">Java</span> for applications or software
-      with high scalability, as well as with <span class="text-yellow-500 font-semibold cursor-pointer" id="javascript-txt">javaScript</span> for web development and
-      many more.
-    </p>
+    <article class="flex flex-col">
+      <h1 class="md:p-2 font-bold">My skills</h1>
+      <p class="text-left md:p-2">
+        I have extensive experience in <span class="text-purple-600">C#</span> and
+        <span class="text-yellow-600">Java</span> for applications or software with
+        high scalability, as well as with <span
+          class="text-yellow-500 font-semibold cursor-pointer"
+          id="javascript-txt">javaScript</span
+        > for web development and many more.
+      </p>
+    </article>
   </div>
   <p class="text-white text-3xl font-semibold text-center p-4">
     Watch one of my videos
@@ -98,40 +106,32 @@
   }
 </style>
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    // Recorrer las entradas recibidas
-    entries.forEach((entry) => {
-      // Está visible en el viewport
-      if (entry.intersectionRatio > 0) {
-        // entry.target es el elemento que se está observando
-        // Agregar la clase para animar
-        entry.target.classList.add("animate_cards");
-        // Dejar de observar
-        observer.unobserve(entry.target);
-      }
-    });
-  });
   // Observar elemento a animar
-  const element = document.getElementById("videos");
-  observer.observe(element as HTMLElement);
-  const observer2 = new IntersectionObserver((entries) => {
-    // Recorrer las entradas recibidas
-    entries.forEach((entry) => {
-      // Está visible en el viewport
-      if (entry.intersectionRatio > 0) {
-        // entry.target es el elemento que se está observando
-        // Agregar la clase para animar
-        entry.target.classList.add("about-card");
-        // Dejar de observar
-        observer.unobserve(entry.target);
-      }
+  function animateCards(animation: string, element: string) {
+    const observer = new IntersectionObserver((entries) => {
+      // Recorrer las entradas recibidas
+      entries.forEach((entry) => {
+        // Está visible en el viewport
+        if (entry.intersectionRatio > 0) {
+          // entry.target es el elemento que se está observando
+          // Agregar la clase para animar
+          entry.target.classList.add(animation);
+          // Dejar de observar
+          observer.unobserve(entry.target);
+        }
+      });
     });
-  });
-  const elemen2 = document.getElementById("about");
-  observer2.observe(elemen2 as HTMLElement);
-  let active = document.getElementById("javascript-txt")
-  let dialog = document.querySelector("dialog")
+    const elemen2 = document.getElementById(element);
+    observer.observe(elemen2 as HTMLElement);
+  }
+  
+  animateCards("animate_cards", "videos")
+  animateCards("animate_cards", "about")
+  animateCards("animate_cards", "card-about")
+  animateCards("animate_cards", "card-skills")
+  let active = document.getElementById("javascript-txt");
+  let dialog = document.querySelector("dialog");
   active?.addEventListener("click", () => {
     dialog!.showModal();
-  })
+  });
 </script>

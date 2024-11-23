@@ -18,7 +18,7 @@ const { title } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="description" content="Porfolio web by Doger" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" id="favicon" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<ViewTransitions />
@@ -26,9 +26,8 @@ const { title } = Astro.props;
 	<body class="min-h-dvh grid-rows-[auto_1fr_auto]">
 		<CatLoader />
 		<Pepinos />
-		<!-- Add hidden in production -->
 		<header
-			class="static flex justify-center h-20 bg-black/70 backdrop-blur-md z-20 border-b border-b-1 border-neutral-600"
+			class="sticky flex justify-center h-20 bg-black/70 backdrop-blur-md z-20 border-b border-b-1 border-neutral-600"
 			id="navigation"
 		>
 			<div class="flex flex-auto justify-start ml-9 items-center gap-4">
@@ -40,17 +39,23 @@ const { title } = Astro.props;
 			<ul
 				class="flex flex-1 flex-grow gap-8 text-white items-center justify-end mr-9"
 			>
-				<li class="hover:font-semibold transition-all ease-in-out delay-75"><a href="#about">About me</a></li>
-				<li class="hover:font-semibold transition-all ease-in-out delay-75"><a href="#contact">Contact</a></li>
+				<li class="hover:font-semibold transition-all ease-in-out delay-75">
+					<a href="#about">About me</a>
+				</li>
+				<li class="hover:font-semibold transition-all ease-in-out delay-75">
+					<a href="#contact">Contact</a>
+				</li>
 			</ul>
 		</header>
-		<!-- Add hidden in production -->
-		<main class="hidden grid-rows-3" id="content">
+		<main class="hidden grid-rows-3 gap-4" id="content">
 			<Game />
 			<slot />
 		</main>
-		<footer class="flex justify-center items-center h-20 bg-black/70 backdrop-blur-md z-20 border-t border-t-1 border-neutral-600" id="content">
-			<p class="text-white" >Landing page created by Yasson</p>
+		<footer
+			class="flex justify-center items-center h-20 bg-black/70 backdrop-blur-md z-20 border-t border-t-1 border-neutral-600"
+			id="content"
+		>
+			<p class="text-white">Copyright by pepinos dot dager</p>
 		</footer>
 	</body>
 </html>
@@ -102,7 +107,6 @@ const { title } = Astro.props;
 			opacity: 1;
 			translate: 0px 0px 0px;
 		}
-
 	}
 </style>
 <script>
@@ -110,11 +114,18 @@ const { title } = Astro.props;
 	let loader = document.getElementById("loader-cat");
 	let textLoader = document.getElementById("text-loader");
 	let logoLoader = document.getElementById("catIcon-loader");
-	let content = document.getElementById("content")
+	let content = document.getElementById("content");
 	// Header
-	let logo = document.getElementById("logo-conteiner")
-	let title = document.getElementById("title-conteiner")
-
+	let logo = document.getElementById("logo-conteiner");
+	let title = document.getElementById("title-conteiner");
+	function adAnimations() {
+		navigation?.classList.remove("hidden");
+		content?.classList.remove("hidden");
+		loader!.style.display = "none";
+		content?.classList.add("grid");
+		logo?.classList.add("logo-animate");
+		title?.classList.add("title-animate");
+	}
 	document.addEventListener("astro:after-swap", () => {
 		loader!.style.display = "block";
 	});
@@ -126,14 +137,22 @@ const { title } = Astro.props;
 				logoLoader?.classList.add("logo-animate");
 			}, 400);
 			setTimeout(() => {
-				navigation?.classList.remove("hidden")
-				loader!.style.display = "none";
-				content?.classList.remove("hidden")
-				content?.classList.add("grid")
-				logo?.classList.add("logo-animate")
-				title?.classList.add("title-animate")
+				adAnimations();
 			}, 500);
 		},
 		{ once: true },
 	);
+	function cambiarFavicon(favicon: string) {
+		const link = document.getElementById("favicon");
+		link!.href = favicon;
+	}
+	document.addEventListener("visibilitychange", () => {
+		if (document.hidden) {
+			// Cambia el favicon cuando el usuario no está en la página
+			cambiarFavicon("./CatIconOff.svg"); // Aquí cambia el favicon cuando no estás en la página
+		} else {
+			// Restaura el favicon cuando el usuario regresa a la página
+			cambiarFavicon("./favicon.svg"); // Aquí restaura el favicon original
+		}
+	});
 </script>

@@ -1,7 +1,71 @@
-<section class="flex flex-col justify-center items-center m-5 row-span-2" id="contact">
+<section
+  class="flex flex-col justify-center items-center m-5 row-span-2"
+  id="contact"
+>
   <h1 class="text-white text-3xl font-semibold text-center p-4">Contact me</h1>
   <div class="flex flex-col justify-center w-1/2 gap-4 items-center">
-    <p class="text-white text-center">If you're interested in my work, contact me at my email <span class="text-green-500">DotDager@Gmail.com</span> or simply click the button below</p>
-    <button class="bg-green-500/85 p-4 text-lg text-white font-bold border-2 border-green-400 rounded-lg hover:bg-green-700 active:bg-green-500 w-72">CONTACT NOW</button>
+    <p class="text-white text-center">
+      If you're interested in my work, contact me at my email <span
+        class="text-green-500">DotDager@Gmail.com</span
+      > or simply click the button below
+    </p>
+    <input
+      class="bg-black/70 px-4 py-3 outline-none w-[280px] text-white rounded-lg border-2 transition-colors duration-100 border-solid focus:border-neutral-600 border-neutral-700"
+      name="text"
+      placeholder="example@gmail.com"
+      type="text"
+      id="mail"
+    />
+    <textarea
+      name="text-content"
+      id="area"
+      placeholder="Help here"
+      class="bg-black/70 px-4 py-3 outline-none w-[280px] text-white rounded-lg border-2 transition-colors duration-100 border-solid focus:border-neutral-600 border-neutral-700"
+    ></textarea>
+    <button
+      class="bg-green-500/85 p-4 text-lg text-white font-bold border-2 border-green-400 rounded-lg hover:bg-green-700 active:bg-green-500 w-72"
+      id="btn-send">CONTACT NOW</button
+    >
   </div>
 </section>
+<script>
+  let btn = document.getElementById("btn-send");
+  btn?.addEventListener("click", () => {
+    btn.innerHTML =
+      "¡SEND!";
+    setTimeout(() => (btn.innerText = "CONTACT NOW"), 500);
+  });
+  function animateCards(animation: string, element: string) {
+    const observer = new IntersectionObserver((entries) => {
+      // Recorrer las entradas recibidas
+      entries.forEach((entry) => {
+        // Está visible en el viewport
+        if (entry.intersectionRatio > 0) {
+          // entry.target es el elemento que se está observando
+          // Agregar la clase para animar
+          entry.target.classList.add(animation);
+          // Dejar de observar
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+    const elemen2 = document.getElementById(element);
+    observer.observe(elemen2 as HTMLElement);
+  }
+  animateCards("slide-top", "mail")
+  animateCards("slide-top", "area")
+  animateCards("slide-top", "btn-send")
+</script>
+<style>
+  .slide-top {
+    animation: slide-top 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  @keyframes slide-top {
+    0% {
+      transform: translateY(100px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+</style>
